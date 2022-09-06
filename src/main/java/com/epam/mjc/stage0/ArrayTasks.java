@@ -121,25 +121,22 @@ public class ArrayTasks {
      */
     public int[][] sortRaggedArray(int[][] arr) {
         int result[][]=arr.clone();
-        // insertion sort
-        for(int i=1;i<result.length;i++){
-            int key[]=result[i].clone();
-            int j=i;
-            while(j>0 && result[j-1].length>key.length){
-                result[j]=result[j-1].clone();
-                j--;
+        for(int i=0;i<result.length-1;i++){
+            for(int j=0;j<result.length-i-1;j++){
+                if(result[j].length>result[j+1].length){
+                    int t[]=result[j];
+                    result[j]=result[j+1];
+                    result[j+1]=t;
+                }
             }
-            result[j]=key;
         }
-
         for(int i=0;i<result.length;i++){
-            // bubble sort
             for(int j=0;j<result[i].length-1;j++){
                 for(int k=0;k<result[i].length-i-1;k++){
                     if(result[j].length>arr[j+1].length){
-                        int t[]=result[j].clone();
-                        result[j]=result[j+1].clone();
-                        result[j+1]=t.clone();
+                        int t[]=result[j];
+                        result[j]=result[j+1];
+                        result[j+1]=t;
                     }
                 }
             }
