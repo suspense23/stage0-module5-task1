@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-
+        return new String[]{ "Winter", "Spring", "Summer", "Autumn" };
     }
 
     /**
@@ -25,7 +25,11 @@ public class ArrayTasks {
      * length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-
+        int[] result = new int[length];
+        for(int i=0;i<length;i++){
+            result[i]=i+1;
+        }
+        return result;
     }
 
     /**
@@ -37,7 +41,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-
+        int sum=0;
+        for (int i: arr) {
+            sum+=i;
+        }
+        return sum;
     }
 
     /**
@@ -50,7 +58,12 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==number){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -63,7 +76,11 @@ public class ArrayTasks {
      * arr = ["pineapple", "apple", "pen"] -> ["pen", "apple", "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-
+        String[] result = new String[arr.length];
+        for(int i=0;i<arr.length;i++){
+            result[arr.length-i-1]=arr[i];
+        }
+        return result;
     }
 
     /**
@@ -78,7 +95,18 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-
+        int[] t = new int[arr.length];
+        int j=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>0){
+                t[j++]=arr[i];
+            }
+        }
+        int[] result = new int[j];
+        for(int i=0;i<result.length;i++){
+            result[i]=t[i];
+        }
+        return result;
     }
 
     /**
@@ -92,6 +120,30 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
+        int result[][]=arr.clone();
+        // insertion sort
+        for(int i=1;i<result.length;i++){
+            int key[]=result[i].clone();
+            int j=i;
+            while(j>0 && result[j-1].length>key.length){
+                result[j]=result[j-1].clone();
+                j--;
+            }
+            result[j]=key;
+        }
 
+        for(int i=0;i<result.length;i++){
+            // bubble sort
+            for(int j=0;j<result[i].length-1;j++){
+                for(int k=0;k<result[i].length-i-1;k++){
+                    if(result[j].length>arr[j+1].length){
+                        int t[]=result[j].clone();
+                        result[j]=result[j+1].clone();
+                        result[j+1]=t.clone();
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
